@@ -6,6 +6,7 @@ import jw.project.ecommerce.application.user.SignupService;
 import jw.project.ecommerce.presentation.user.request.LoginRequest;
 import jw.project.ecommerce.presentation.user.request.SignupRequest;
 import jw.project.ecommerce.presentation.user.response.SignupResponse;
+import jw.project.ecommerce.presentation.user.response.TokenResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,14 +31,14 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ApiResponse<Void> login(@Valid @RequestBody LoginRequest request) {
+    public ApiResponse<TokenResponse> login(@Valid @RequestBody LoginRequest request) {
         /**
          * [O] Parameter : LoginRequest
          * [O] LoginService 구현 및 로그인 메소드 호출
          * [O] 공통 Response 구현
          */
-        loginService.login(request.toCommand());
-        return null;
+        TokenResponse response = loginService.login(request.toCommand());
+        return ApiResponse.success(response);
     }
 
     @PostMapping("/logout")
