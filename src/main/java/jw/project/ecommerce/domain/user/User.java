@@ -1,5 +1,6 @@
 package jw.project.ecommerce.domain.user;
 
+import jw.project.ecommerce.application.user.command.SignupCommand;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,5 +27,9 @@ public class User {
         this.email = email;
         this.password = password;
         this.name = name;
+    }
+
+    public static User register(String email, String encryptedPw, String name) {
+        return new User(email, encryptedPw, name);
     }
 }

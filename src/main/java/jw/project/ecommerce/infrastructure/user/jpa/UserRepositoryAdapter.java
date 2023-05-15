@@ -1,4 +1,4 @@
-package jw.project.ecommerce.infrastructure.user;
+package jw.project.ecommerce.infrastructure.user.jpa;
 
 import jw.project.ecommerce.domain.user.User;
 import jw.project.ecommerce.domain.user.UserRepository;
