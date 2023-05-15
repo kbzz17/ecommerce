@@ -9,10 +9,14 @@ public record ApiResponse<T>(
         return new ApiResponse<>(true, data, null);
     }
 
-    public static <T> ApiResponse<T> fail(ErrorCode code, String message) {
-        return new ApiResponse<>(false, null, new Error(code, message));
+    public static <T> ApiResponse<T> fail(ErrorCode code) {
+        return new ApiResponse<>(false, null, new Error(code.getCode(), code.getStatus()));
     }
 
-    record Error(ErrorCode code, String msg) {
+    public static <T> ApiResponse<T> fail(ErrorCode code, String msg) {
+        return new ApiResponse<>(false, null, new Error(code.getCode(), msg));
+    }
+
+    record Error(String code, String msg) {
     }
 }
