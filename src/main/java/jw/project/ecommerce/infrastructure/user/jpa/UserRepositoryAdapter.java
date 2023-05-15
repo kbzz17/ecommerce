@@ -5,6 +5,8 @@ import jw.project.ecommerce.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryAdapter implements UserRepository {
@@ -18,5 +20,10 @@ public class UserRepositoryAdapter implements UserRepository {
     @Override
     public boolean ExistsByEmail(String  email) {
         return userRepository.existsByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 }
