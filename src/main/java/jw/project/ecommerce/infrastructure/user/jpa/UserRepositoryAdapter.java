@@ -14,4 +14,9 @@ public class UserRepositoryAdapter implements UserRepository {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public boolean ExistsByEmail(String  email) {
+        return userRepository.existsByEmail(email);
+    }
 }
