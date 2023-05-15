@@ -1,7 +1,9 @@
 package jw.project.common;
 
 public enum ErrorCode {
-    DUPLICATED_EMAIL("400", "이미 존재하는 이메일입니다.");
+    DUPLICATED_EMAIL("400", "이미 존재하는 이메일입니다."),
+
+    INVALID_INPUT("400","잘못된 입력입니다.");
 
 
     private final String code;

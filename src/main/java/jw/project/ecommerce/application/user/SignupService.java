@@ -1,6 +1,7 @@
 package jw.project.ecommerce.application.user;
 
 import jw.project.ecommerce.application.user.command.SignupCommand;
+import jw.project.ecommerce.domain.exception.DuplicatedEmailException;
 import jw.project.ecommerce.domain.user.PasswordEncryptor;
 import jw.project.ecommerce.domain.user.User;
 import jw.project.ecommerce.domain.user.UserRepository;
@@ -21,6 +22,9 @@ public class SignupService {
          * [O] User JpaRepository 구현
          * [O] 가입 시 비밀번호 암호화 구현
          */
+        if (userRepository.ExistsByEmail(command.email())) {
+            throw new DuplicatedEmailException();
+        }
         String encryptedPassword = passwordEncryptor.encoder(command.password());
 
         User user = User.register(command.email(), encryptedPassword, command.name());
