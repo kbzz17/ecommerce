@@ -1,11 +1,13 @@
 package jw.project.ecommerce.presentation.user.request;
 
 
+import jw.project.common.Role;
 import jw.project.ecommerce.application.user.command.SignupCommand;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 public record SignupRequest(
         /**
@@ -24,14 +26,16 @@ public record SignupRequest(
         @Size(min = 8, max = 20, message = "8~20글자 사이로 입력해 주세요")
         String password,
         @NotBlank(message = "이름을 입력해 주세요")
-        String name
+        String name,
+        Set<Role> role
 )
 {
     public SignupCommand toCommand(){
         return new SignupCommand(
                 this.email,
                 this.password,
-                this.name
+                this.name,
+                this.role
         );
     }
 }
