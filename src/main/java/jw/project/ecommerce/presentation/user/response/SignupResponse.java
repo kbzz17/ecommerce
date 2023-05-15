@@ -5,7 +5,6 @@ import jw.project.ecommerce.domain.user.User;
 public record SignupResponse(
         Long id,
         String email,
-        String password,
         String name
 )
 {
@@ -13,7 +12,6 @@ public record SignupResponse(
         return new SignupResponse(
                 user.getId(),
                 user.getEmail(),
-                user.getPassword(),
                 user.getName()
         );
     }
