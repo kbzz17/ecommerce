@@ -1,7 +1,9 @@
 package jw.project.ecommerce.presentation.user;
 
+import jw.project.common.ApiResponse;
 import jw.project.ecommerce.application.user.SignupService;
 import jw.project.ecommerce.presentation.user.request.SignupRequest;
+import jw.project.ecommerce.presentation.user.response.SignupResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,40 +16,44 @@ public class UserController {
     private final SignupService signupService;
 
     @PostMapping("/signup")
-    public void signup(@Valid @RequestBody SignupRequest request) {
+    public ApiResponse<SignupResponse> signup(@Valid @RequestBody SignupRequest request) {
         /**
          * [O] Parameter : SignupRequest
          * [O] SignupService 구현 및 회원 가입 메소드 호출
-         * [ ] 공통 Response 구현
+         * [O] 공통 Response 구현
          */
-        signupService.signup(request.toCommand());
+        SignupResponse response = signupService.signup(request.toCommand());
+        return ApiResponse.success(response);
     }
 
     @PostMapping("/login")
-    public void login() {
+    public ApiResponse<Void> login() {
         /**
          * [ ] Parameter : LoginRequest
          * [ ] LoginService 구현 및 로그인 메소드 호출
-         * [ ] 공통 Response 구현
+         * [O] 공통 Response 구현
          */
+        return null;
     }
 
     @PostMapping("/logout")
-    public void logout() {
+    public ApiResponse<?> logout() {
         /**
          * [ ] Parameter : LogoutRequest
          * [ ] LogoutService 구현 및 호출
-         * [ ] 공통 Response 구현
+         * [O] 공통 Response 구현
          */
+        return null;
     }
 
     @DeleteMapping("/withdraw")
-    public void withdraw() {
+    public ApiResponse<?> withdraw() {
         /**
          *  [ ] Parameter : WithdrawRequest
          *  [ ] WithdrawService 구현 및 호출
-         *  [ ] 공통 Response 구현
+         *  [O] 공통 Response 구현
          */
+        return null;
     }
 
 }
