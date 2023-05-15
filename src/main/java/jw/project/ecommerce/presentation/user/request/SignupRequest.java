@@ -21,7 +21,7 @@ public record SignupRequest(
         @Email
         String email,
         @NotBlank(message = "패스워드를 입력해 주세요")
-        @Size(min = 8, max = 2, message = "8~20글자 사이로 입력해 주세요")
+        @Size(min = 8, max = 20, message = "8~20글자 사이로 입력해 주세요")
         String password,
         @NotBlank(message = "이름을 입력해 주세요")
         String name
