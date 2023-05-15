@@ -12,3 +12,6 @@ spring:
       hibernate:
         format_sql: true
     database : mysql
+
+jwt:
+  secret: "안녕하세요 Ecommerce 프로젝트를 개발하는 유지웅입니다."
