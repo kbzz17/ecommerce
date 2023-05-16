@@ -20,6 +20,12 @@ public class RedisTokenRepository implements TokenRepository {
     }
 
     @Override
+    public Boolean deleteToken(String refreshToken) {
+        String key = getKey(refreshToken);
+        return redisTemplate.unlink(key);
+    }
+
+    @Override
     public Boolean existsKey(String refreshToken) {
         String key = getKey(refreshToken);
         return redisTemplate.hasKey(key);
