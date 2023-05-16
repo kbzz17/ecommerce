@@ -28,11 +28,11 @@ public class TokenGenerator {
 
     private String generateJwtToken(String email, Set<Role> role, int hour) {
         Claims claims = Jwts.claims();
-        claims.put("email", email);
         claims.put("role", role);
 
         return Jwts.builder()
                 .signWith(createSecretKey())
+                .setSubject(email)
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + Duration.ofHours(hour).toMillis()))
