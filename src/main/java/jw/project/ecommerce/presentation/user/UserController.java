@@ -2,6 +2,7 @@ package jw.project.ecommerce.presentation.user;
 
 import jw.project.common.ApiResponse;
 import jw.project.ecommerce.application.user.LoginService;
+import jw.project.ecommerce.application.user.LogoutService;
 import jw.project.ecommerce.application.user.SignupService;
 import jw.project.ecommerce.presentation.user.request.LoginRequest;
 import jw.project.ecommerce.presentation.user.request.SignupRequest;
@@ -18,6 +19,7 @@ import javax.validation.Valid;
 public class UserController {
     private final SignupService signupService;
     private final LoginService loginService;
+    private final LogoutService logoutService;
 
     @PostMapping("/signup")
     public ApiResponse<SignupResponse> signup(@Valid @RequestBody SignupRequest request) {
@@ -42,13 +44,13 @@ public class UserController {
     }
 
     @PostMapping("/logout")
-    public ApiResponse<?> logout() {
+    public ApiResponse<?> logout(@RequestHeader("RefreshToken") String refreshToken) {
         /**
-         * [ ] Parameter : LogoutRequest
-         * [ ] LogoutService 구현 및 호출
+         * [O] Parameter : RefreshToken
+         * [O] LogoutService 구현 및 호출
          * [O] 공통 Response 구현
          */
-        return null;
+        return ApiResponse.success(logoutService.logout(refreshToken));
     }
 
     @DeleteMapping("/withdraw")
