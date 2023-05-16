@@ -21,8 +21,8 @@ public class LoginService {
     public TokenResponse login(LoginCommand command) {
         User user = validateLogin(command);
 
-        String accessToken = tokenGenerator.generateAccessToken(user.getEmail(), user.getRole());
-        String refreshToken = tokenGenerator.generateRefreshToken(user.getEmail(), user.getRole());
+        String accessToken = tokenGenerator.generateAccessToken(user.getId(), user.getRole());
+        String refreshToken = tokenGenerator.generateRefreshToken(user.getId(), user.getRole());
 
         return new TokenResponse(accessToken, refreshToken);
     }

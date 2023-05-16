@@ -18,21 +18,21 @@ public class TokenGenerator {
     @Value("${jwt.secret}")
     private String SECRET_KEY;
 
-    public String generateAccessToken(String email, Set<Role> role) {
-        return generateJwtToken(email, role, 6);
+    public String generateAccessToken(Long id, Set<Role> role) {
+        return generateJwtToken(id, role, 6);
     }
 
-    public String generateRefreshToken(String email, Set<Role> role) {
-        return generateJwtToken(email, role, 24);
+    public String generateRefreshToken(Long id, Set<Role> role) {
+        return generateJwtToken(id, role, 24);
     }
 
-    private String generateJwtToken(String email, Set<Role> role, int hour) {
+    private String generateJwtToken(Long id, Set<Role> role, int hour) {
         Claims claims = Jwts.claims();
+        claims.put("id", id);
         claims.put("role", role);
 
         return Jwts.builder()
                 .signWith(createSecretKey())
-                .setSubject(email)
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + Duration.ofHours(hour).toMillis()))
