@@ -4,6 +4,7 @@ import jw.project.ecommerce.application.user.command.LoginCommand;
 import jw.project.ecommerce.domain.exception.EmailNotExistsException;
 import jw.project.ecommerce.domain.exception.PasswordNotMatchException;
 import jw.project.ecommerce.domain.user.PasswordEncryptor;
+import jw.project.ecommerce.domain.user.TokenRepository;
 import jw.project.ecommerce.domain.user.User;
 import jw.project.ecommerce.domain.user.UserRepository;
 import jw.project.ecommerce.infrastructure.user.jwt.TokenGenerator;
@@ -17,12 +18,15 @@ public class LoginService {
     private final UserRepository userRepository;
     private final PasswordEncryptor passwordEncryptor;
     private final TokenGenerator tokenGenerator;
+    private final TokenRepository tokenRepository;
 
     public TokenResponse login(LoginCommand command) {
         User user = validateLogin(command);
 
-        String accessToken = tokenGenerator.generateAccessToken(user.getEmail(), user.getRole());
-        String refreshToken = tokenGenerator.generateRefreshToken(user.getEmail(), user.getRole());
+        String accessToken = tokenGenerator.generateAccessToken(user.getId(), user.getRole());
+        String refreshToken = tokenGenerator.generateRefreshToken(user.getId(), user.getRole());
+
+        tokenRepository.save(refreshToken);
 
         return new TokenResponse(accessToken, refreshToken);
     }

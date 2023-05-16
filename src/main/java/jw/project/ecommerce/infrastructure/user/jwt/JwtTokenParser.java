@@ -16,10 +16,10 @@ public class JwtTokenParser {
     private static final String HEADER_PREFIX = "Bearer ";
 
     public Optional<String> extract(String header) {
-        if(header == null || header.isBlank()){
+        if (header == null || header.isBlank()) {
             return Optional.empty();
         }
-        if(header.length() < 7){
+        if (header.length() < 7) {
             return Optional.empty();
         }
         return Optional.of(header.substring(HEADER_PREFIX.length()));
@@ -32,7 +32,7 @@ public class JwtTokenParser {
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
-            return new AuthenticatedAccount(jwt.getSubject(), (List<String>) jwt.get("role"));
+            return new AuthenticatedAccount(((Number)jwt.get("id")).longValue(), (List<String>) jwt.get("role"));
         } catch (SignatureException | MalformedJwtException e) {
             throw new RuntimeException("Invalid Jwt Token");
         } catch (ExpiredJwtException e) {

@@ -13,5 +13,9 @@ spring:
         format_sql: true
     database : mysql
 
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
 jwt:
   secret: "안녕하세요 Ecommerce 프로젝트를 개발하는 유지웅입니다."

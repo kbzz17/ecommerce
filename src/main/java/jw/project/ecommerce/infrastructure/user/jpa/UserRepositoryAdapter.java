@@ -18,7 +18,17 @@ public class UserRepositoryAdapter implements UserRepository {
     }
 
     @Override
-    public boolean ExistsByEmail(String  email) {
+    public void deleteById(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public boolean ExistsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
 
