@@ -1,5 +1,6 @@
 package jw.project.ecommerce.application.User;
 
+import jw.project.common.Role;
 import jw.project.ecommerce.application.user.SignupService;
 import jw.project.ecommerce.application.user.command.SignupCommand;
 import jw.project.ecommerce.domain.exception.DuplicatedEmailException;
@@ -15,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @SpringBootTest
 @Transactional
@@ -35,8 +33,10 @@ public class SignupTest {
     @Test
     @DisplayName("SignupRequest Validation 테스트")
     void SignupRequest_Validation_Test() {
+        Set<Role> role = new HashSet<>();
+        role.add(Role.USER);
         // given
-        SignupRequest request = new SignupRequest("poujisnaver.com", "1234", "");
+        SignupRequest request = new SignupRequest("poujisnaver.com", "1234", "", role);
         // when
         Set<ConstraintViolation<SignupRequest>> validate = validatorInjected.validate(request);
         // then
@@ -54,8 +54,10 @@ public class SignupTest {
     @Test
     @DisplayName("회원가입 이메일 중복 검사")
     void DuplicatedValidation() {
+        Set<Role> role = new HashSet<>();
+        role.add(Role.USER);
         //given
-        SignupCommand command = new SignupCommand("poujis2@naver.com", "1234123412", "yjw");
+        SignupCommand command = new SignupCommand("poujis2@naver.com", "1234123412", "yjw", role);
 
         //when
         userRepository.save(command.toEntity());

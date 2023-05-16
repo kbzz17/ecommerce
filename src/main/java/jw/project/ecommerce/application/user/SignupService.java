@@ -27,7 +27,7 @@ public class SignupService {
         }
         String encryptedPassword = passwordEncryptor.encoder(command.password());
 
-        User user = User.register(command.email(), encryptedPassword, command.name());
+        User user = User.register(command.email(), encryptedPassword, command.name(), command.role());
         userRepository.save(user);
 
         return SignupResponse.from(user);
