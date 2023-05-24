@@ -25,8 +25,8 @@ public class ShopController {
     }
 
     @PostMapping("/getShop")
-    public ApiResponse<?> getShop(Long shopId) {
-        return ApiResponse.success(shopService.getShop(shopId));
+    public ApiResponse<?> getShop(Long shopId, Long ownerId) {
+        return ApiResponse.success(shopService.getShop(shopId, ownerId));
     }
 
     @GetMapping("/myShops")
