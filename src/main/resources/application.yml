@@ -13,9 +13,17 @@ spring:
         format_sql: true
     database : mysql
 
-    redis:
-      host: 127.0.0.1
-      port: 6379
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 jwt:
   secret: "안녕하세요 Ecommerce 프로젝트를 개발하는 유지웅입니다."
+
+openapi:
+  service-id: "a9cc9db1e8cf4d45869c"
+  secret-key: "1ca34bcb4fcf4b209fd6"
+  url:
+    authentication: "http://sgisapi.kostat.go.kr/OpenAPI3/auth/authentication.json"
+    geocode: "https://sgisapi.kostat.go.kr/OpenAPI3/addr/geocode.json"
+
