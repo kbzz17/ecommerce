@@ -62,4 +62,8 @@ public class ShopService {
 
         return shopRepository.save(shop);
     }
+
+    public Boolean ownerShopCheck(Long shopId, Long ownerId) {
+        return shopRepository.findByIdAndOwnerId(shopId, ownerId);
+    }
 }
