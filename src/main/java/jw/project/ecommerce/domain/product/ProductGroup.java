@@ -1,10 +1,15 @@
 package jw.project.ecommerce.domain.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import jw.project.ecommerce.presentation.product.request.AddProductGroupRequest;
 import lombok.AccessLevel;
@@ -25,6 +30,11 @@ public class ProductGroup {
     private String name;
     private String content;
     private Integer priority;
+
+    @OneToMany(mappedBy = "productGroup", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Product> productList;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 

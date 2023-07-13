@@ -9,5 +9,5 @@ public interface ShopRepository extends JpaRepository<Shop, Long> {
 
     List<Shop> findByOwnerId(Long ownerId);
 
-    Boolean findByIdAndOwnerId(Long shopId, Long ownerId);
+    Boolean existsByIdAndOwnerId(Long shopId, Long ownerId);
 }
