@@ -64,6 +64,6 @@ public class ShopService {
     }
 
     public Boolean ownerShopCheck(Long shopId, Long ownerId) {
-        return shopRepository.findByIdAndOwnerId(shopId, ownerId);
+        return shopRepository.existsByIdAndOwnerId(shopId, ownerId);
     }
 }

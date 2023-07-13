@@ -1,11 +1,13 @@
 package jw.project.ecommerce.application.product;
 
+import java.util.List;
 import jw.project.ecommerce.application.shop.ShopService;
 import jw.project.ecommerce.domain.product.ProductGroup;
 import jw.project.ecommerce.domain.shop.Exception.OwnerShopCheckException;
 import jw.project.ecommerce.infrastructure.product.ProductGroupRepository;
 import jw.project.ecommerce.presentation.product.request.AddProductGroupRequest;
 import jw.project.ecommerce.presentation.product.request.UpdateProductGroupRequest;
+import jw.project.ecommerce.presentation.product.response.ProductGroupResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,13 @@ public class ProductGroupService {
     private final ShopService shopService;
 
     private final ProductGroupRepository productGroupRepository;
+
+    public List<ProductGroupResponse> searchGroupInfo(Long shopId, Long ownerId) {
+        validateOwnerShopCheck(shopId, ownerId);
+
+        List<ProductGroup> productGroup = productGroupRepository.findByShopId(shopId);
+        return productGroup.stream().map(ProductGroupResponse::from).toList();
+    }
 
     public ProductGroup addProductGroup(Long ownerId, AddProductGroupRequest request) {
         if (!shopService.ownerShopCheck(request.getShopId(), ownerId)) {
